@@ -44,7 +44,7 @@ _Development Phase_:
 
 The team agreed on guidelines to follow during development. The technologies and guidelines that we agreed to use and follow are:
 
-- **HTML5:** TO build the basic structure.
+- **HTML5:** To build the basic structure.
 - **CSS3:** To style the website.
 - **Git & Github:** To plan and distribute tasks as a team accordingly.
 - **Media Query:** To make the pages responsive for 3 devices: Mobile, Tablet and Desktop.
