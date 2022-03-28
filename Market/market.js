@@ -12,8 +12,8 @@ const topLosers = document.querySelector(".top-losers");
 const boxesDiv = document.querySelector(".boxes");
 const searchDiv = document.querySelector(".div-search");
 const searchIcon = document.querySelector(".btnSearch");
-const cancel = document.querySelector('.ri-close-line');
-let sum = 1;
+const cancelIcon = document.querySelector('.ri-close-line');
+let condition = 1;
 
 // Building The COIN BOX CARD:
 function buildBoxDom(name, symbol, change, marketCap, price, volume) {
@@ -247,7 +247,7 @@ fetch(api1Link)
     searchIcon.addEventListener("click", (e) => {
       e.preventDefault();
       let searchTxt = document.querySelector("#search").value;
-      if (sum === 1) {
+      if (condition === 1) {
         // remove all old boxes, show the search result box.
         for (let i = 0; i < coins.length; i++) {
           if (searchTxt.toLowerCase() == coins[i].symbol.toLowerCase()) {
@@ -264,14 +264,14 @@ fetch(api1Link)
               coins[i].volumeUsd24Hr
             );
             // searchTxt = '';
-            sum = 0;
+            condition = 0;
           }
         }
         // re-build old boxes after removing the search result.
-        cancel.addEventListener("click", () => {
+        cancelIcon.addEventListener("click", () => {
           e.preventDefault();
           searchTxt = "-";
-          if (sum === 0) {
+          if (condition === 0) {
             let box = document.querySelector(".box");
             box.remove();
             for (let i = 0; i < 20; i++) {
@@ -285,7 +285,7 @@ fetch(api1Link)
               );
             }
           }
-          sum = 1;
+          condition = 1;
         });
       }
     });
