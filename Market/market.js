@@ -3,7 +3,7 @@ const api1Link = "https://api.coincap.io/v2/assets/";
 const api2Link = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=bitcoin";
 const mainPage = document.querySelector(".main");
 const headPage = document.querySelector(".head-page");
-const searchAnalysis = document.getElementById("search-analysis");
+const analysisIcon = document.getElementById("search-analysis");
 const lists = document.querySelector(".list");
 const changePercent = document.querySelector(".change-percent");
 let percentArray = [];
@@ -363,7 +363,7 @@ fetch(api2Link)
     vWap.appendChild(vWapSpan);
     vWapSpan.textContent = `FDValuation: ${api2Data[0].fully_diluted_valuation}`;
 
-    searchAnalysis.addEventListener("click", () => {
+    analysisIcon.addEventListener("click", () => {
       lists.classList.toggle("show-analysis-search");
     }); // end of Market Summary
   })

@@ -3,7 +3,7 @@
 ![2](https://mi9retail-rm9gupg15kxbkvpc.stackpathdns.com/wp-content/uploads/2019/03/evolution-of-retail-analytics-190318.jpg)
 ## **Live Website** :tv: <span id="live"></span>
 
-#### You can check out the website => [**Here**](https://gsg-cf05.github.io/CryptocurrencySite/).
+#### You can check out the website => [**Here**](https://shbairali.github.io/CryptoNote/).
 
 
 # Crypto Note App
