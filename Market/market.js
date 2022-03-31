@@ -22,28 +22,30 @@ function buildBoxDom(name, symbol, change, marketCap, price, volume) {
   boxesDiv.appendChild(box);
   box.classList.add("box");
 
+ 
   //  ---------  Head Box ---------
   let headBox = document.createElement("div");
-  box.appendChild(headBox);
   headBox.classList.add("head-box");
+  box.appendChild(headBox);
+ 
 
   // - Image Big div
   let imgTitle = document.createElement("div");
-  headBox.appendChild(imgTitle);
   imgTitle.classList.add("img-title");
-
+  headBox.appendChild(imgTitle);
+ 
   let divImage = document.createElement("div");
-  imgTitle.appendChild(divImage);
   divImage.classList.add("div-img");
-
+  imgTitle.appendChild(divImage);
+  
   let coinImage = document.createElement("img");
   divImage.appendChild(coinImage);
   coinImage.setAttribute("src", "../images/bitcoinImg.jpg");
 
-  // - create the 3 headbox texts
+  //  head box outputs
   let coinName = document.createElement("p");
-  imgTitle.appendChild(coinName);
   coinName.classList.add("name");
+  imgTitle.appendChild(coinName);
   coinName.textContent = name;
 
   let coinSymbol = document.createElement("span");
@@ -53,12 +55,13 @@ function buildBoxDom(name, symbol, change, marketCap, price, volume) {
   let percentChange = document.createElement("p");
   percentChange.classList.add("percent-change-coin");
   headBox.appendChild(percentChange);
-  percentChange.textContent = change + "%";
+  percentChange.textContent = change + " %"
 
   // ---------  Content Box ---------
   let contentBox = document.createElement("div");
-  box.appendChild(contentBox);
   contentBox.classList.add("content-box");
+  box.appendChild(contentBox);
+  
 
   // content box outputs
 
@@ -180,8 +183,7 @@ fetch(api1Link)
     // !TOP 5 Gainers:
 
     // sorting elements in descending order
-    percentArray.sort((a, b) => b - a);
-    let gainersArray = percentArray.slice(0, 5);
+    let gainersArray = percentArray.sort((a, b) => b - a).slice(0, 5);
 
     // 2 levels for loop to match all possibilities.
     for (let i = 0; i < coins.length; i++) {
@@ -199,8 +201,8 @@ fetch(api1Link)
 
           let gainersCoinChangePercent = document.createElement("span");
           gainersCoin.appendChild(gainersCoinChangePercent);
-          gainersCoinChangePercent.textContent = `${coins[i].changePercent24Hr.substring(0, 6)} % `;
-        } // end of comparing if
+          gainersCoinChangePercent.textContent = `${gainersArray[x].substring(0, 6)} % `;
+        } // end of IF
       }
     } // end of gainers block.
 

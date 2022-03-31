@@ -50,22 +50,34 @@ img {
   display: flex;
   justify-content: space-around;
   width: 100%;
-  height: 130px;
+  height: 150px;
   align-items: center;
   border-radius: 15px;
   margin-top: 24px;
-  background-image: url(../images/crypto.jpg);
+  background-image: url(../images/box-background.png);
 }
 .top-gainers {
-  color: #5bbfb0;
 }
 .top-losers {
-  color: #f16d7a;
 }
 .gainers-coin,
 .losers-coin {
   display: flex;
   font-size: 13px;
+  margin-bottom: 5px;
+  
+}
+.gainers-coin  span {
+  padding-left: 7px;
+  color: #5bbfb0;
+
+}
+.gainers-coin  p {
+}
+.losers-coin  span {
+  padding-left: 7px;
+  color: #f16d7a;
+  
 }
 
 .div-search {
@@ -120,8 +132,10 @@ i.uil.uil-angle-down {
   padding: 8px;
   margin-top: 16px;
   border-radius: 15px;
-  background-image: url(../images/crypto.jpg);
+  background-image: url(../images/box-background.png);
+
 }
+
 .head-box {
   display: flex;
   justify-content: space-between;
@@ -131,6 +145,7 @@ i.uil.uil-angle-down {
 .content-box {
   display: flex;
   justify-content: space-evenly;
+  margin-top: 15px;
 }
 .img-title {
   display: flex;
@@ -140,6 +155,7 @@ i.uil.uil-angle-down {
   padding-left: 8px;
   color: #fff;
   font-size: 12px;
+  margin-right: 15px;
 }
 .name span,
 .percent-change-coin span {
@@ -187,13 +203,18 @@ i.uil.uil-angle-down {
   align-items: center;
   justify-content: center;
 }
+
+.coin-details span{
+  color: #F5A200
+  ;
+}
 /* for medium devices */
 @media screen and (min-width: 568px) {
 }
 
 @media screen and (min-width: 768px) {
   .head-page {
-    width: 50%;
+    width: 90%;
     margin-left: auto;
     margin-right: auto;
 
@@ -201,12 +222,12 @@ i.uil.uil-angle-down {
     margin-top: 104px;
   }
   .change-percent {
-    width: 50%;
+    width: 90%;
     margin-left: auto;
     margin-right: auto;
   }
   .div-search {
-    width: 40%;
+    width: 75%;
     margin-left: auto;
     margin-right: auto;
   }
