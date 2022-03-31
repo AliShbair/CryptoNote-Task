@@ -113,7 +113,7 @@ The team agreed on guidelines to follow during development. The technologies and
 ## Running the project locally :hotel: <span id="usage"></span>
 
 ```
-- [git clone https://github.com/GSG-CF04/Climostate.git](https://github.com/GSG-CF05/CryptocurrencySite.git)
+- [git clone https://github.com/ShbairAli/CryptoNote.git)
 - cd CryptocurrencySite
 - code .
 ```
