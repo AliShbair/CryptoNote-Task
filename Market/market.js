@@ -6,14 +6,13 @@ const headPage = document.querySelector(".head-page");
 const analysisIcon = document.getElementById("search-analysis");
 const lists = document.querySelector(".list");
 const changePercent = document.querySelector(".change-percent");
-let percentArray = [];
 const topGainers = document.querySelector(".top-gainers");
 const topLosers = document.querySelector(".top-losers");
 const boxesDiv = document.querySelector(".boxes");
 const searchDiv = document.querySelector(".div-search");
 const searchIcon = document.querySelector(".btnSearch");
 const cancelIcon = document.querySelector('.ri-close-line');
-let condition = 1;
+let searchEvent = 'off';
 
 // Building The COIN BOX CARD:
 function buildBoxDom(name, symbol, change, marketCap, price, volume) {
@@ -174,26 +173,27 @@ fetch(api1Link)
   .then((apiData) => {
     let coins = apiData.data; // array of objects
 
-    // !TOP 5 Gainers & Losers SECTION:
+    // !-------------------TOP 5 Gainers & Losers SECTION-------------------
+
     // new array of all percentChange values inside all objects, so we can handle it easily as an array.
+    let percentArray = [];
     for (let i = 0; i < coins.length; i++) {
       percentArray.push(coins[i].changePercent24Hr);
     }
+    // sort it in descending order
+    percentArray = percentArray.sort((a, b) => b - a)
 
-    // !TOP 5 Gainers:
-
-    // sorting elements in descending order
-    let gainersArray = percentArray.sort((a, b) => b - a).slice(0, 5);
-
+    
+    // ?TOP 5 Gainers:
+    let gainersArray = percentArray.slice(0, 5)
     // 2 levels for loop to match all possibilities.
-    for (let i = 0; i < coins.length; i++) {
-      for (let x = 0; x < gainersArray.length; x++) {
-          // compare the same value in both (api, array), to reach to the symbol.
-        if (coins[i].changePercent24Hr == gainersArray[x]) {
+    for (let x = 0; x < gainersArray.length; x++) {
+      for (let i = 0; i < coins.length; i++) {
+          // compare the same value in both (array api), to reach to the symbol.
+          if (gainersArray[x] == coins[i].changePercent24Hr) {
           let gainersCoin = document.createElement("div");
           gainersCoin.classList.add("gainers-coin");
           topGainers.appendChild(gainersCoin);
-
           // Last two outputs:
           let gainersCoinPara = document.createElement("p");
           gainersCoin.appendChild(gainersCoinPara);
@@ -202,36 +202,32 @@ fetch(api1Link)
           let gainersCoinChangePercent = document.createElement("span");
           gainersCoin.appendChild(gainersCoinChangePercent);
           gainersCoinChangePercent.textContent = `${gainersArray[x].substring(0, 6)} % `;
-        } // end of IF
+        } 
       }
     } // end of gainers block.
 
-    // !TOP 5 Losers:
-
-    // sorting elements in ascending order
-    percentArray.sort((a, b) => a - b);
-    let losersArray = percentArray.slice(0, 5);
-
-    for (let i = 0; i < coins.length; i++) {
-      for (let x = 0; x < losersArray.length; x++) {
-        if (coins[i].changePercent24Hr == losersArray[x]) {
+    // ?TOP 5 Losers:
+    let losersArray = percentArray.slice(-5).reverse()
+    for (let x = 0; x < losersArray.length; x++) {
+      for (let i = 0; i < coins.length; i++) {
+        if (losersArray[x] == coins[i].changePercent24Hr) {
           let losersCoin = document.createElement("div");
           losersCoin.classList.add("losers-coin");
           topLosers.appendChild(losersCoin);
-
           // last two outputs:
           let losersCoinPara = document.createElement("p");
           losersCoin.appendChild(losersCoinPara);
           losersCoinPara.textContent = `${coins[i].symbol}`;
-
+          
           let losersCoinChangePercent = document.createElement("span");
           losersCoin.appendChild(losersCoinChangePercent);
-          losersCoinChangePercent.textContent = `${coins[i].changePercent24Hr.substring(0, 6)} % `;
-        } // end of IF
+          losersCoinChangePercent.textContent = `${losersArray[x].substring(0, 6)} % `;
+        } 
       }
     } // end of losers block.
 
-    // !TOP 20 MARKET CAP COINS SECTION:
+    // !-------------------TOP 20 MARKET CAP COINS SECTION-------------------
+
     // return wanted (arguments) values from first 20 objects
     for (let i = 0; i < 20; i++) {
       buildBoxDom(
@@ -244,18 +240,18 @@ fetch(api1Link)
       );
     }
 
-    // !SEARCH SECTION:
+    // !-------------------SEARCH SECTION-------------------
     
     searchIcon.addEventListener("click", (e) => {
       e.preventDefault();
-      let searchTxt = document.querySelector("#search").value;
-      if (condition === 1) {
+      let searchTxt = document.querySelector("#search");
+      if (searchEvent === 'off') {
         // remove all old boxes, show the search result box.
         for (let i = 0; i < coins.length; i++) {
-          if (searchTxt.toLowerCase() == coins[i].symbol.toLowerCase()) {
+          if (searchTxt.value.toLowerCase() == coins[i].symbol.toLowerCase()) {
             let oldBoxes = document.querySelectorAll(".box");
-            oldBoxes.forEach((ele) => {
-              ele.remove();
+            oldBoxes.forEach((el) => {
+              el.remove();
             });
             buildBoxDom(
               coins[i].name,
@@ -265,16 +261,15 @@ fetch(api1Link)
               coins[i].priceUsd.substring(0, 7),
               coins[i].volumeUsd24Hr
             );
-            // searchTxt = '';
-            condition = 0;
+            searchEvent = 'on';
           }
         }
         // re-build old boxes after removing the search result.
         cancelIcon.addEventListener("click", () => {
           e.preventDefault();
-          searchTxt = "-";
-          if (condition === 0) {
+          if (searchEvent === 'on') {
             let box = document.querySelector(".box");
+            searchTxt.value = ''
             box.remove();
             for (let i = 0; i < 20; i++) {
               buildBoxDom(
@@ -287,15 +282,15 @@ fetch(api1Link)
               );
             }
           }
-          condition = 1;
+          searchEvent = 'off';
         });
       }
     });
   })
   .catch(Error);
 
+  // !-------------------MARKET SUMMARY SECTION-------------------
 
-  // !MARKET SUMMARY SECTION:
 fetch(api2Link)
   .then((res) => {
     return res.json();
