@@ -56,10 +56,7 @@ img {
   margin-top: 24px;
   background-image: url(../images/box-background.png);
 }
-.top-gainers {
-}
-.top-losers {
-}
+
 .gainers-coin,
 .losers-coin {
   display: flex;
@@ -70,14 +67,18 @@ img {
 .gainers-coin  span {
   padding-left: 7px;
   color: #5bbfb0;
-
 }
 .gainers-coin  p {
+  width: 50px;
 }
-.losers-coin  span {
+
+.losers-coin   span {
   padding-left: 7px;
   color: #f16d7a;
   
+}
+.losers-coin p {
+  width: 50px;
 }
 
 .div-search {
