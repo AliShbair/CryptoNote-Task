@@ -182,7 +182,6 @@ fetch(api1Link)
     }
     // sort it in descending order
     percentArray = percentArray.sort((a, b) => b - a)
-
     
     // ?TOP 5 Gainers:
     let gainersArray = percentArray.slice(0, 5)
