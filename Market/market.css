@@ -14,6 +14,7 @@
   position: relative;
   color: var(--text-color);
 }
+
 .div-img {
   width: 30px;
   height: 30px;
@@ -50,14 +51,30 @@ img {
   display: flex;
   justify-content: space-around;
   width: 100%;
-  height: 170px;
+  height: 205px;
   align-items: center;
   border-radius: 15px;
   margin-top: 24px;
   background-image: url(../images/Group1.png);
   /* border: 2px solid #f5a200; */
 }
-
+.TOPGainersSpan {
+  color: var(--title-color);
+  font-size: 17px;
+  font-weight: 600;
+  
+}
+.top-losers{
+  text-align: center;
+}
+.TOPLosersSpan {
+  color: var(--title-color);
+  font-size: 17px;
+  font-weight: 600;
+}
+.br{
+  margin-bottom: 10px;
+}
 .gainers-coin,
 .losers-coin {
   display: flex;
@@ -71,14 +88,19 @@ img {
 }
 .gainers-coin p {
   width: 50px;
+    color: var(--text-color);
+    font-weight: 800;
+    font-size: 15px;
 }
-
 .losers-coin span {
   padding-left: 7px;
   color: #f16d7a;
 }
 .losers-coin p {
   width: 50px;
+   color: var(--text-color);
+    font-weight: 800;
+    font-size: 15px;
 }
 
 .div-search {
@@ -133,7 +155,7 @@ i.uil.uil-angle-down {
   padding: 8px;
   margin-top: 16px;
   border-radius: 15px;
-    background-image: url(../images/Group.png);
+    background-image: url(../images/Group2.png);
 font-weight: 600;
   /* background-image: url(../images/box-background.png); */
   /* border: 1px solid #f5a200; */
@@ -158,7 +180,7 @@ font-weight: 600;
 .name,
 .percent-change-coin {
   padding-left: 8px;
-  color: var(--text-color);
+  color: #fff;
 
   font-size: 15px;
   margin-right: 15px;
