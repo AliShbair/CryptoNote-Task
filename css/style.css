@@ -11,9 +11,9 @@
     /* color mode */
     --title-color: #F6B01A;
     --subtitle-color: #707070;
-    --text-color: #030E20;
-    --input-color: #E5E5E5;
-    --body-color: #fff;
+    --text-color: #E5E5E5;
+    --input-color: #19294475;
+    --body-color: #030E20;
 
     /* ============================ font size && typography ============================ */
     --body-font: 'Poppins-Regular';
@@ -29,12 +29,11 @@
 
 /* ==================== variables dark theme ==================== */
 body.dark-theme{
-    --title-color: #F6B01A;
+     --title-color: #F6B01A;
     --subtitle-color: #707070;
-    --text-color: #E5E5E5;
-    --input-color: #19294475;
-    --body-color: #030E20;
-    
+    --text-color: #030E20;
+    --input-color: #E5E5E5;
+    --body-color: #fff;
 }
 
 /* ==================== button dark / light ==================== */

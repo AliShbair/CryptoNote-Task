@@ -1,6 +1,7 @@
 "use strict";
 const api1Link = "https://api.coincap.io/v2/assets/";
-const api2Link = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=bitcoin";
+const api2Link =
+  "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=bitcoin";
 const mainPage = document.querySelector(".main");
 const headPage = document.querySelector(".head-page");
 const analysisIcon = document.getElementById("search-analysis");
@@ -11,8 +12,8 @@ const topLosers = document.querySelector(".top-losers");
 const boxesDiv = document.querySelector(".boxes");
 const searchDiv = document.querySelector(".div-search");
 const searchIcon = document.querySelector(".btnSearch");
-const cancelIcon = document.querySelector('.ri-close-line');
-let searchEvent = 'off';
+const cancelIcon = document.querySelector(".ri-close-line");
+let searchEvent = "off";
 
 // Building The COIN BOX CARD:
 function buildBoxDom(name, symbol, change, marketCap, price, volume) {
@@ -21,22 +22,20 @@ function buildBoxDom(name, symbol, change, marketCap, price, volume) {
   boxesDiv.appendChild(box);
   box.classList.add("box");
 
- 
   //  ---------  Head Box ---------
   let headBox = document.createElement("div");
   headBox.classList.add("head-box");
   box.appendChild(headBox);
- 
 
   // - Image Big div
   let imgTitle = document.createElement("div");
   imgTitle.classList.add("img-title");
   headBox.appendChild(imgTitle);
- 
+
   let divImage = document.createElement("div");
   divImage.classList.add("div-img");
   imgTitle.appendChild(divImage);
-  
+
   let coinImage = document.createElement("img");
   divImage.appendChild(coinImage);
   coinImage.setAttribute("src", "../images/bitcoinImg.jpg");
@@ -54,13 +53,12 @@ function buildBoxDom(name, symbol, change, marketCap, price, volume) {
   let percentChange = document.createElement("p");
   percentChange.classList.add("percent-change-coin");
   headBox.appendChild(percentChange);
-  percentChange.textContent = change + " %"
+  percentChange.textContent = change + " %";
 
   // ---------  Content Box ---------
   let contentBox = document.createElement("div");
   contentBox.classList.add("content-box");
   box.appendChild(contentBox);
-  
 
   // content box outputs
 
@@ -165,7 +163,6 @@ function buildBoxDom(name, symbol, change, marketCap, price, volume) {
   coinVolume.textContent = "Volume";
 } // end of build Box Function
 
-
 fetch(api1Link)
   .then((res) => {
     return res.json();
@@ -181,18 +178,29 @@ fetch(api1Link)
       percentArray.push(coins[i].changePercent24Hr);
     }
     // sort it in descending order
-    percentArray = percentArray.sort((a, b) => b - a)
-    
+    percentArray = percentArray.sort((a, b) => b - a);
+
     // ?TOP 5 Gainers:
-    let gainersArray = percentArray.slice(0, 5)
+    let gainersArray = percentArray.slice(0, 5);
+
+    let topGainersTitle = document.createElement("span");
+    topGainersTitle.classList.add("TOPGainersSpan");
+    topGainers.appendChild(topGainersTitle);
+    topGainersTitle.textContent = `TOP 5 Gainers ⇡`;
+
+    let br = document.createElement("div");
+    br.classList.add("br");
+    topGainers.appendChild(br);
+
     // 2 levels for loop to match all possibilities.
     for (let x = 0; x < gainersArray.length; x++) {
       for (let i = 0; i < coins.length; i++) {
-          // compare the same value in both (array api), to reach to the symbol.
-          if (gainersArray[x] == coins[i].changePercent24Hr) {
+        // compare the same value in both (array, api), to reach to the symbol.
+        if (gainersArray[x] == coins[i].changePercent24Hr) {
           let gainersCoin = document.createElement("div");
           gainersCoin.classList.add("gainers-coin");
           topGainers.appendChild(gainersCoin);
+
           // Last two outputs:
           let gainersCoinPara = document.createElement("p");
           gainersCoin.appendChild(gainersCoinPara);
@@ -200,13 +208,23 @@ fetch(api1Link)
 
           let gainersCoinChangePercent = document.createElement("span");
           gainersCoin.appendChild(gainersCoinChangePercent);
-          gainersCoinChangePercent.textContent = `${gainersArray[x].substring(0, 6)} % `;
-        } 
+          gainersCoinChangePercent.textContent = `${gainersArray[x].substring(0,6)} % `;
+        }
       }
     } // end of gainers block.
 
     // ?TOP 5 Losers:
-    let losersArray = percentArray.slice(-5).reverse()
+    let losersArray = percentArray.slice(-5).reverse();
+
+    let topLosersTitle = document.createElement("span");
+    topLosersTitle.classList.add("TOPLosersSpan");
+    topLosers.appendChild(topLosersTitle);
+    topLosersTitle.textContent = `TOP 5 Losers ⇣`;
+
+    let br1 = document.createElement("div");
+    br1.classList.add("br");
+    topLosers.appendChild(br1);
+
     for (let x = 0; x < losersArray.length; x++) {
       for (let i = 0; i < coins.length; i++) {
         if (losersArray[x] == coins[i].changePercent24Hr) {
@@ -217,11 +235,11 @@ fetch(api1Link)
           let losersCoinPara = document.createElement("p");
           losersCoin.appendChild(losersCoinPara);
           losersCoinPara.textContent = `${coins[i].symbol}`;
-          
+
           let losersCoinChangePercent = document.createElement("span");
           losersCoin.appendChild(losersCoinChangePercent);
-          losersCoinChangePercent.textContent = `${losersArray[x].substring(0, 6)} % `;
-        } 
+          losersCoinChangePercent.textContent = `${losersArray[x].substring(0,6)} % `;
+        }
       }
     } // end of losers block.
 
@@ -240,11 +258,11 @@ fetch(api1Link)
     }
 
     // !-------------------SEARCH SECTION-------------------
-    
+
     searchIcon.addEventListener("click", (e) => {
       e.preventDefault();
       let searchTxt = document.querySelector("#search");
-      if (searchEvent === 'off') {
+      if (searchEvent === "off") {
         // remove all old boxes, show the search result box.
         for (let i = 0; i < coins.length; i++) {
           if (searchTxt.value.toLowerCase() == coins[i].symbol.toLowerCase()) {
@@ -260,15 +278,15 @@ fetch(api1Link)
               coins[i].priceUsd.substring(0, 7),
               coins[i].volumeUsd24Hr
             );
-            searchEvent = 'on';
+            searchEvent = "on";
           }
         }
         // re-build old boxes after removing the search result.
         cancelIcon.addEventListener("click", () => {
           e.preventDefault();
-          if (searchEvent === 'on') {
+          if (searchEvent === "on") {
             let box = document.querySelector(".box");
-            searchTxt.value = ''
+            searchTxt.value = "";
             box.remove();
             for (let i = 0; i < 20; i++) {
               buildBoxDom(
@@ -281,14 +299,14 @@ fetch(api1Link)
               );
             }
           }
-          searchEvent = 'off';
+          searchEvent = "off";
         });
       }
     });
   })
   .catch(Error);
 
-  // !-------------------MARKET SUMMARY SECTION-------------------
+// !-------------------MARKET SUMMARY SECTION-------------------
 
 fetch(api2Link)
   .then((res) => {
